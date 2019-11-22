@@ -30,19 +30,22 @@ public class OAuth {
                 .build();
         URL url = new URL(URLDecoder.decode(uri.toString(), "UTF-8"));
         String urlLlaveMaestra = url.toString();
-        openOAuthURL(activity,urlLlaveMaestra);
+        openOAuthURL(activity,urlLlaveMaestra,false);
     }
 
-    public static void openOAuthURL(Activity activity, String url){
+    public static void openOAuthURL(Activity activity, String url,boolean newTask){
         Uri uri = Uri.parse(url);
         CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
 
         String packageName = CustomTabsHelper.getPackageNameToUse(activity, url);
 
         CustomTabsIntent customTabsIntent = intentBuilder.build();
-        //customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        //customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if(newTask) {
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }else {
+            customTabsIntent.intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
         customTabsIntent.intent.setPackage(packageName);
         customTabsIntent.launchUrl(activity, uri);
     }
