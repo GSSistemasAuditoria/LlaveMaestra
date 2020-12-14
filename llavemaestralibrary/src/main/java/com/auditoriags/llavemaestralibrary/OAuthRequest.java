@@ -85,6 +85,9 @@ public class OAuthRequest extends AsyncTask<String,String,String> {
         } catch (KeyManagementException e) {
             e.printStackTrace();
             return OAuthConstants.ERROR_TAG + e.getMessage();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return OAuthConstants.ERROR_TAG + e.getMessage();
         }
     }
 
