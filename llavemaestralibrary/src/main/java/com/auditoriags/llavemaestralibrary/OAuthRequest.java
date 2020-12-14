@@ -3,6 +3,7 @@ package com.auditoriags.llavemaestralibrary;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
 
@@ -77,16 +78,16 @@ public class OAuthRequest extends AsyncTask<String,String,String> {
         try {
             return conexionOAuth(url,token);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e("Error ADA:",Log.getStackTraceString(e));
             return OAuthConstants.ERROR_TAG + e.getMessage();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("Error ADA:",Log.getStackTraceString(e));
             return OAuthConstants.ERROR_TAG + e.getMessage();
         } catch (KeyManagementException e) {
-            e.printStackTrace();
+            Log.e("Error ADA:",Log.getStackTraceString(e));
             return OAuthConstants.ERROR_TAG + e.getMessage();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("Error ADA:",Log.getStackTraceString(e));
             return OAuthConstants.ERROR_TAG + e.getMessage();
         }
     }
@@ -119,7 +120,7 @@ public class OAuthRequest extends AsyncTask<String,String,String> {
                 return true;
             }
         });
-        final SSLContext sslContext = SSLContext.getInstance("TSL");
+        final SSLContext sslContext = SSLContext.getInstance("SSL");
         sslContext.init(null, new X509TrustManager[]{new MyTrustManager()}, new java.security.SecureRandom());
         final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
         conn.setSSLSocketFactory(sslSocketFactory);
