@@ -116,8 +116,8 @@ public class OAuthRequest extends AsyncTask<String,String,String> {
                 return true;
             }
         });
-        final SSLContext sslContext = SSLContext.getInstance("SSL");
-        sslContext.init(null, new X509TrustManager[]{new NullX509TrustManager()}, new java.security.SecureRandom());
+        final SSLContext sslContext = SSLContext.getInstance("TSL");
+        sslContext.init(null, new X509TrustManager[]{new MyTrustManager()}, new java.security.SecureRandom());
         final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
         conn.setSSLSocketFactory(sslSocketFactory);
         conn.setRequestProperty("Authorization", basicAuth);

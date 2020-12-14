@@ -5,7 +5,7 @@ import java.security.cert.X509Certificate;
 
 import javax.net.ssl.X509TrustManager;
 
-public class NullX509TrustManager implements X509TrustManager {
+public class MyTrustManager implements X509TrustManager {
     /**
      * Does nothing.
      *
