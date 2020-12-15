@@ -114,16 +114,6 @@ public class OAuthRequest extends AsyncTask<String,String,String> {
     private String conexionOAuth(String urlStr, String basicAuth) throws NoSuchAlgorithmException, IOException, KeyManagementException {
         URL url = new URL(urlStr);
         HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
-        HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier(){
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
-        final SSLContext sslContext = SSLContext.getInstance("SSL");
-        sslContext.init(null, new X509TrustManager[]{new MyTrustManager()}, new java.security.SecureRandom());
-        final SSLSocketFactory sslSocketFactory = sslContext.getSocketFactory();
-        conn.setSSLSocketFactory(sslSocketFactory);
         conn.setRequestProperty("Authorization", basicAuth);
         conn.setReadTimeout(7000);
         conn.setConnectTimeout(7000);
